@@ -1,13 +1,11 @@
-name: "Next Action Workflow"
+name: "CD Workflow"
 
 on:
-  pull_request:
-    branches: [opened, synchronize, reopened]
-    paths:
-      - [ "**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx" ]
+  push:
+    branches: [main, develop]
 
 jobs:
-  linter:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Install dependencies
@@ -19,5 +17,5 @@ jobs:
           cache: yarn
       - run: yarn install --immutable
 
-      - name: Run linter
-        run: yarn lint
+      - name: Deploy application
+        run: yarn lint && yarn build && yarn deploy:prod
