@@ -1,0 +1,20 @@
+name: "Action Example"
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [opened, synchronize, reopened]
+
+jobs:
+  build-example:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run example action
+        run: echo "Hello, this is an example action!"
+
+      - name: Run a list file command
+        run: ls -la
