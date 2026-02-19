@@ -1,0 +1,23 @@
+name: "Next Action Workflow"
+
+on:
+  pull_request:
+    branches: [opened, synchronize, reopened]
+    paths:
+      - [ "**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx" ]
+
+jobs:
+  linter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependencies
+        uses: actions/checkout@v6
+        with:
+          node-version: 24
+      - run: corepack enable
+        with:
+          cache: yarn
+      - run: yarn install --immutable
+
+      - name: Run linter
+        run: yarn lint
