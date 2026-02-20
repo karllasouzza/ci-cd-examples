@@ -1,5 +1,6 @@
 {
   "name": "ci-cd-examples",
+  "type": "module",
   "packageManager": "yarn@4.11.0",
   "scripts": {
     "dev": "next dev",
@@ -7,6 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "deploy:prod": "yarn build && vercel ./build --confirm --no-clipboard --token=$VERCEL_TOKEN --prod"
+    "deploy:prod": "yarn build deploy:staging --prod",
+    "deploy:staging": "yarn build && vercel ./build --confirm --no-clipboard --token=$VERCEL_TOKEN",
+    "deploy:preview": "node scripts/pull-request-preview.js"
   }
 }
