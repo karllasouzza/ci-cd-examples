@@ -1,0 +1,25 @@
+on:
+  push:
+  schedule:
+    - cron: "0 * * * *"
+
+jobs:
+  update-redme-with-latest-videos:
+    runs-on: ubuntu-latest
+    name: Atualiza este readme com os ultimos videos
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Pega os videos do youtube
+        uses: gautamkrishnar/blog-post-workflow@master
+        with:
+          comment_tag_name: YOUTUBE
+          max_post_count: 4
+          feed_list: "https://www.youtube.com/feeds/videos.xml?channel_id=YOUR_CHANNEL_ID"
+
+      - uses: gautamkrishnar/blog-post-workflow@master
+        with:
+          comment_tag_name: MEDIUM
+          feed_list: "https://medium.com/feed/@YOU_PROFILE"
