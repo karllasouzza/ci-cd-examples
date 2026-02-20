@@ -10,6 +10,11 @@
     "lint:fix": "next lint --fix",
     "deploy:prod": "yarn build deploy:staging --prod",
     "deploy:staging": "yarn build && vercel ./build --confirm --no-clipboard --token=$VERCEL_TOKEN",
-    "deploy:preview": "node scripts/pull-request-preview.js"
+    "deploy:preview": "node scripts/pull-request-preview.js",
+    "test:e2e:open": "cypress open",
+    "test:e2e": "cypress run --config-file cypress.config.js"
+  },
+  "devDependencies": {
+    "cypress": "^15.10.0"
   }
 }
